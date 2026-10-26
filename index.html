@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=1792790046">
+<link rel="stylesheet" href="assets/css/style.css?v=1792981522">
 <script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('tm_pt')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('pt-enter')}sessionStorage.removeItem('tm_pt')}catch(e){}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"TM Isı Sistemleri","image":"assets/img/favicon.svg","telephone":"+905302163800","email":"satis@tmisisistemleri.com","url":"https://kalorimetre.net","address":{"@type":"PostalAddress","streetAddress":"Tacettin Veli Mah., Şht. Miralay Nazım Bey Blv. No:95/B","addressLocality":"Melikgazi","addressRegion":"Kayseri","postalCode":"38050","addressCountry":"TR"},"sameAs":["https://www.instagram.com/tmisisistemleri/"]}</script>
 </head>
@@ -109,20 +109,10 @@
 </div>
 
 <main id="main">
-<section class="hero">
-  <div class="hero__grid-bg"></div>
-  <svg class="hero__pipes" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-      <linearGradient id="hp1" x1="0" x2="1"><stop offset="0" stop-color="#E11B38"/><stop offset="1" stop-color="#FF6F84"/></linearGradient>
-      <linearGradient id="hp2" x1="0" x2="1"><stop offset="0" stop-color="#2A54B5"/><stop offset="1" stop-color="#8FB4FF"/></linearGradient>
-    </defs>
-    <path class="p-base" d="M-40 640 H 380 Q 420 640 420 600 V 520 Q 420 480 460 480 H 1500"/>
-    <path class="p-flow" stroke="url(#hp1)" d="M-40 640 H 380 Q 420 640 420 600 V 520 Q 420 480 460 480 H 1500"/>
-    <path class="p-base" d="M1500 760 H 900 Q 860 760 860 720 V 690 Q 860 650 820 650 H -40"/>
-    <path class="p-flow" stroke="url(#hp2)" style="animation-direction:reverse" d="M1500 760 H 900 Q 860 760 860 720 V 690 Q 860 650 820 650 H -40"/>
-  </svg>
+<section class="hero hero--photo">
+  <div class="hero__bg" aria-hidden="true"><img src="assets/img/ortam/kazan-dairesi.jpg" alt="" fetchpriority="high"></div>
   <div class="wrap on-dark">
-    <div>
+    <div class="hero__copy">
       <span class="eyebrow">Kayseri · Isı ölçüm &amp; tesisat çözümleri</span>
       <h1 class="h-xl"><span class="line"><span>Isıyı doğru ölç,</span></span><span class="line"><span>enerjiyi <span class="serif">adil</span></span></span><span class="line"><span>paylaş.</span></span></h1>
       <p class="lead">Kalorimetre, su sayacı, okuma sistemleri, pompa ve vana çözümlerinde 20'yi aşkın markayla satış, uzman montaj ve satış sonrası destek. Binanıza uygun çözümü birlikte seçelim.</p>
@@ -130,21 +120,16 @@
         <a class="btn" href="urunler.html">Ürünleri keşfet <svg><use href="#i-arrow"/></svg></a>
         <a class="btn btn--ghost" href="teklif.html">Ücretsiz keşif iste</a>
       </div>
-      <div class="hero__trust">
-        <div><span class="ic"><svg><use href="#i-shield"/></svg></span><span><b>5 Yıl Garanti</b>Isı ve su sayaçlarında</span></div>
-        <div><span class="ic"><svg><use href="#i-tool"/></svg></span><span><b>Uzman Montaj</b>Deneyimli ekip</span></div>
-        <div><span class="ic"><svg><use href="#i-headset"/></svg></span><span><b>Satış Sonrası</b>Hızlı destek</span></div>
-      </div>
-    </div>
-    <div class="hero__stage" aria-hidden="true">
-      <div class="hero__orb"></div>
-      <div class="hero__device anim-gate is-live" data-art="heat-us"></div>
-      <div class="chip chip--a"><span class="dot"></span><span><small>Anlık güç</small><b data-live="kw">12.3 kW</b></span></div>
-      <div class="chip chip--b"><span><small>Gidiş / Dönüş</small><b><span class="t-hot" data-live="sup">70.0°</span> / <span class="t-cold" data-live="ret">52.4°</span></b></span></div>
-      <div class="chip chip--c"><span><small>Uzaktan okuma</small><b>M-Bus · LoRaWAN</b></span></div>
     </div>
   </div>
-  <div class="scroll-cue" aria-hidden="true"></div>
+  <div class="hero__bar">
+    <div class="wrap">
+      <div><svg><use href="#i-shield"/></svg><span><b>5 yıl garanti</b>Isı ve su sayaçlarında</span></div>
+      <div><svg><use href="#i-tool"/></svg><span><b>Uzman montaj</b>Deneyimli saha ekibi</span></div>
+      <div><svg><use href="#i-headset"/></svg><span><b>Satış sonrası destek</b>Ulaşılabilir teknik ekip</span></div>
+      <div><svg><use href="#i-clock"/></svg><span><b>24 saatte teklif</b>Montaj dahil net fiyat</span></div>
+    </div>
+  </div>
 </section>
 
 <div class="marquee" aria-label="Çalıştığımız markalar">
@@ -177,53 +162,10 @@
         <li><div><b>Uzaktan okuma</b><span>M-Bus, kablosuz M-Bus ve LoRaWAN ile kapıyı çalmadan merkezi okuma.</span></div></li>
       </ul>
     </div>
-    <div class="diagram rv" style="--d:2" aria-label="Kalorimetre çalışma şeması">
-      <svg viewBox="0 0 600 330" role="img">
-        <defs>
-          <linearGradient id="dgB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A3C8F"/><stop offset="1" stop-color="#0B1F4D"/></linearGradient>
-        </defs>
-        <g font-family="Manrope,sans-serif" font-size="11" font-weight="700" fill="#8E9AC0" letter-spacing="1.5">
-          <text x="30" y="40">KAZAN DAİRESİ</text><text x="410" y="40">DAİRENİZ</text>
-        </g>
-        <rect x="30" y="60" width="120" height="200" rx="14" fill="url(#dgB)" stroke="rgba(255,255,255,.12)"/>
-        <g transform="translate(90 170)">
-          <path class="flame" d="M0 -36 C 18 -14 22 0 14 16 C 8 28 -8 28 -14 16 C -22 0 -14 -12 -6 -18 C -6 -6 0 -2 4 -4 C 6 -16 2 -26 0 -36Z" fill="#E11B38"/>
-          <path class="flame f2" d="M0 -10 C 8 0 8 10 3 16 C 0 20 -6 18 -7 12 C -8 4 -2 -2 0 -10Z" fill="#FFB0BC"/>
-        </g>
-        <rect x="390" y="60" width="180" height="200" rx="14" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)" stroke-dasharray="4 6"/>
-        <g transform="translate(430 140)">
-          <rect width="100" height="70" rx="8" fill="#fff" opacity=".92"/>
-          <g fill="#C9D1E3"><rect x="10" y="8" width="8" height="54" rx="4"/><rect x="26" y="8" width="8" height="54" rx="4"/><rect x="42" y="8" width="8" height="54" rx="4"/><rect x="58" y="8" width="8" height="54" rx="4"/><rect x="74" y="8" width="8" height="54" rx="4"/></g>
-          <g class="heatwaves" stroke="#E11B38" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M20 -6 q4 -5 0 -10 q-4 -5 0 -10"/><path d="M50 -6 q4 -5 0 -10 q-4 -5 0 -10"/><path d="M80 -6 q4 -5 0 -10 q-4 -5 0 -10"/></g>
-          <text x="50" y="92" text-anchor="middle" font-family="Manrope" font-size="11" font-weight="700" fill="#AEB8D3">Radyatör</text>
-        </g>
-        <!-- gidiş -->
-        <path d="M150 100 H 480 V 140" fill="none" stroke="rgba(225,27,56,.25)" stroke-width="12" stroke-linejoin="round"/>
-        <path class="dflow" d="M150 100 H 480 V 140" fill="none" stroke="#FF6F84" stroke-width="3" stroke-linejoin="round"/>
-        <!-- dönüş -->
-        <path d="M480 210 V 230 H 150" fill="none" stroke="rgba(42,84,181,.35)" stroke-width="12" stroke-linejoin="round"/>
-        <path class="dflow" d="M480 210 V 230 H 150" fill="none" stroke="#8FB4FF" stroke-width="3" stroke-linejoin="round"/>
-        <!-- sensörler -->
-        <g transform="translate(330 100)"><circle r="9" fill="#071433" stroke="#FF6F84" stroke-width="2"/><text y="-18" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#FF8193" data-live="sup">70.0°</text></g>
-        <path d="M330 109 V 196" stroke="rgba(255,255,255,.35)" stroke-width="1.5" stroke-dasharray="3 4"/>
-        <g transform="translate(270 196)">
-          <rect width="96" height="62" rx="10" fill="#fff"/>
-          <rect x="8" y="8" width="80" height="26" rx="4" fill="#CFE3D2"/>
-          <text x="82" y="27" text-anchor="end" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#1C2A20" data-live="kwh">48213</text>
-          <text x="12" y="17" font-family="Manrope" font-size="6.5" font-weight="800" fill="#2B3B2F" opacity=".7">kWh</text>
-          <text x="48" y="51" text-anchor="middle" font-family="Manrope" font-size="9" font-weight="800" fill="#0B1F4D">KALORİMETRE</text>
-        </g>
-        <g transform="translate(215 230)"><text y="-12" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#8FB4FF" data-live="ret">52.4°</text></g>
-        <g font-family="Manrope" font-size="10.5" font-weight="700">
-          <text x="200" y="88" fill="#FF8193">GİDİŞ</text><text x="165" y="254" fill="#8FB4FF">DÖNÜŞ</text>
-        </g>
-      </svg>
-      <div class="readout">
-        <div><small>Gidiş</small><b data-live="sup">70.0°C</b></div>
-        <div><small>Dönüş</small><b data-live="ret">52.4°C</b></div>
-        <div><small>Anlık güç</small><b data-live="kw">12.3 kW</b></div>
-      </div>
-    </div>
+    <figure class="explain__media rv" style="--d:2">
+      <img src="assets/img/ortam/site.jpg" alt="Merkezi ısıtmalı modern konut sitesi" loading="lazy">
+      <figcaption><span>Merkezi ısıtmalı binalar</span><b>Tüketime göre ısı paylaşımı</b></figcaption>
+    </figure>
   </div>
 </section>
 
@@ -368,9 +310,8 @@
 </nav>
 <div class="toast" role="status" aria-live="polite"><svg><use href="#i-check"/></svg><span></span></div>
 
-<script src="assets/js/data.js?v=1792790046"></script>
-<script src="assets/js/photos.js?v=1792790046"></script>
-<script src="assets/js/illus.js?v=1792790046"></script>
-<script src="assets/js/app.js?v=1792790046"></script>
+<script src="assets/js/data.js?v=1792981522"></script>
+<script src="assets/js/photos.js?v=1792981522"></script>
+<script src="assets/js/app.js?v=1792981522"></script>
 </body>
 </html>

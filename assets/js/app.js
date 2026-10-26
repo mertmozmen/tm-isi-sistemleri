@@ -10,12 +10,12 @@
   const icon = (id) => `<svg><use href="#${id}"/></svg>`;
 
   const CATS = [
-    { id: 'kalorimetre', name: 'Kalorimetreler', art: 'heat-us', desc: 'Ultrasonik, mekanik ve büyük çaplı ısı sayaçları ile bireysel ısı paylaşımı.' },
-    { id: 'su-sayaci', name: 'Su Sayaçları', art: 'water-cold', desc: 'Sıcak, soğuk, ultrasonik ve haberleşmeli su sayaçları.' },
-    { id: 'okuma', name: 'Okuma Cihazları', art: 'converter', desc: 'M-Bus konvertörler ve merkezi okuma birimleri.' },
-    { id: 'pompa', name: 'Pompa Sistemleri', art: 'pump-circ', desc: 'Sirkülasyon pompası, hidrofor, dalgıç pompa ve ısı pompası.' },
-    { id: 'vana', name: 'Vana ve Kontrol', art: 'valve3', desc: 'Fark basınç, 3 yollu vana, termostat, kollektör ve emniyet ekipmanı.' },
-    { id: 'tesisat', name: 'Tesisat Ürünleri', art: 'tank', desc: 'Genleşme tankı, rekor, conta, pil ve bağlantı elemanları.' }
+    { id: 'kalorimetre', name: 'Kalorimetreler', art: 'heat-us', cover: 'assets/img/ortam/montaj.jpg', desc: 'Ultrasonik, mekanik ve büyük çaplı ısı sayaçları ile bireysel ısı paylaşımı.' },
+    { id: 'su-sayaci', name: 'Su Sayaçları', art: 'water-cold', img: 'polimeter-soguk-su-sayaci', desc: 'Sıcak, soğuk, ultrasonik ve haberleşmeli su sayaçları.' },
+    { id: 'okuma', name: 'Okuma Cihazları', art: 'converter', img: 'calmet-m250-konvertor', desc: 'M-Bus konvertörler ve merkezi okuma birimleri.' },
+    { id: 'pompa', name: 'Pompa Sistemleri', art: 'pump-circ', img: 'wilo-flansli-sirkulasyon-pompasi', desc: 'Sirkülasyon pompası, hidrofor, dalgıç pompa ve ısı pompası.' },
+    { id: 'vana', name: 'Vana ve Kontrol', art: 'valve3', img: 'caleffi-termostatik-karisim-vanasi', desc: 'Fark basınç, 3 yollu vana, termostat, kollektör ve emniyet ekipmanı.' },
+    { id: 'tesisat', name: 'Tesisat Ürünleri', art: 'tank', img: 'wates-genlesme-tanki', desc: 'Genleşme tankı, rekor, conta, pil ve bağlantı elemanları.' }
   ];
   const catName = Object.fromEntries(CATS.map(c => [c.id, c.name]));
 
@@ -80,7 +80,7 @@
   /* ---------- görsel ---------- */
   function visual(p) {
     if (PHOTOS[p.id]) return `<img src="assets/img/urunler/${PHOTOS[p.id]}" alt="${esc(p.t)}" loading="lazy">`;
-    return TMArt.svg(p.a, { title: p.t });
+    return `<span class="ph"><svg><use href="#i-mark"/></svg><small>Görsel hazırlanıyor</small></span>`;
   }
   function card(p, i = 0) {
     const on = cart.has(p.id);
@@ -129,7 +129,6 @@
 
   /* ---------- ortak ---------- */
   function common() {
-    $$('[data-art]').forEach(el => { el.innerHTML = TMArt.svg(el.dataset.art, {}); });
     $$('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
     const dr = $('#drawer');
     $$('[data-drawer-open]').forEach(b => b.addEventListener('click', () => { dr.classList.add('is-open'); dr.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }));
@@ -159,7 +158,7 @@
     if (cats) cats.innerHTML = CATS.map((c, i) => {
       const n = P.filter(p => p.c === c.id).length;
       return `<a class="cat rv anim-gate ${i === 0 ? 'cat--feature' : i === CATS.length - 1 ? 'cat--wide' : ''}" style="--d:${i}" href="urunler.html?kat=${c.id}">
-        <div class="cat__art">${TMArt.svg(c.art, {})}</div>
+        <div class="cat__art">${c.cover ? `<img class="cat__cover" src="${c.cover}" alt="" loading="lazy">` : `<img src="assets/img/urunler/${c.img}.jpg" alt="" loading="lazy">`}</div>
         <div class="cat__body"><div><span class="cat__n">${String(i + 1).padStart(2, '0')} · ${n} ürün</span><h3>${c.name}</h3><p>${c.desc}</p></div><span class="cat__go">${icon('i-arrow')}</span></div></a>`;
     }).join('');
     const rail = $('[data-rail]');
@@ -202,7 +201,7 @@
     const norm = s => s.toLocaleLowerCase('tr').replace(/[ıi̇]/g, 'i').normalize('NFD').replace(/[̀-ͯ]/g, '');
 
     $('[data-fcats]').innerHTML = [{ id: '', name: 'Tüm ürünler', art: 'heat-mech' }, ...CATS].map(c =>
-      `<button class="f-cat" type="button" data-kat="${c.id}"><span class="ico">${TMArt.svg(c.art, {})}</span>${c.name}<em>${c.id ? P.filter(p => p.c === c.id).length : P.length}</em></button>`).join('');
+      `<button class="f-cat" type="button" data-kat="${c.id}">${c.name}<em>${c.id ? P.filter(p => p.c === c.id).length : P.length}</em></button>`).join('');
     const brands = [...new Map(P.filter(p => p.b).map(p => [p.b, p.bn])).entries()].sort((a, b) => a[1].localeCompare(b[1], 'tr'));
     $('[data-fbrands]').innerHTML = `<button class="pill" type="button" data-marka="">Tümü</button>` + brands.map(([k, n]) => `<button class="pill" type="button" data-marka="${k}">${esc(n)}</button>`).join('');
 
