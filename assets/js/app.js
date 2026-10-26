@@ -391,8 +391,9 @@
     e.preventDefault();
     go(u.href);
   });
-  addEventListener('pageshow', e => { if (e.persisted) document.documentElement.classList.remove('pt-out', 'pt-enter'); });
+  addEventListener('pageshow', e => { if (e.persisted) document.documentElement.classList.remove('pt-out', 'pt-enter', 'pt-intro'); });
   if (document.documentElement.classList.contains('pt-enter')) setTimeout(() => document.documentElement.classList.remove('pt-enter'), 1100);
+  if (document.documentElement.classList.contains('pt-intro')) setTimeout(() => document.documentElement.classList.remove('pt-intro'), 2000);
   window.TMgo = go;
 
   common(); home(); catalog(); quote(); contact(); faqNav();

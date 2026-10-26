@@ -905,3 +905,15 @@ html.pt-enter .hero h1 .line:nth-child(3) > span { animation-delay: .99s; }
   .explain__media figcaption, .about__photo figcaption { left: 12px; right: 12px; bottom: 12px; padding: 12px 16px; }
 }
 .cat--feature .cat__n { color: #FF8193; }
+
+/* ilk açılış: aynı 3D logo, gel–bekle–git */
+html.pt-intro .pt { visibility: visible; pointer-events: auto; }
+html.pt-intro .pt__panel { transform: none; animation: ptPanelOut .6s 1.2s cubic-bezier(.76, 0, .24, 1) forwards; }
+html.pt-intro .pt__logo { animation: ptLogoIn .55s .12s cubic-bezier(.2, .8, .2, 1) forwards, ptLogoOut .45s .9s cubic-bezier(.5, 0, .75, 0) forwards; }
+html.pt-intro .pt__mark { animation: ptSpin 1s .12s cubic-bezier(.2, .8, .2, 1) both; }
+html.pt-intro .pt__sub { animation: ptSub .5s .4s ease both; }
+@keyframes ptSub { from { opacity: 0; letter-spacing: .6em; } to { opacity: 1; } }
+html.pt-intro .hero h1 .line > span { animation-delay: 1.45s; }
+html.pt-intro .hero h1 .line:nth-child(2) > span { animation-delay: 1.57s; }
+html.pt-intro .hero h1 .line:nth-child(3) > span { animation-delay: 1.69s; }
+html.pt-intro .hero__bg img { animation-delay: 1.2s; }
