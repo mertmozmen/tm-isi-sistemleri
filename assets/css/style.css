@@ -917,3 +917,18 @@ html.pt-intro .hero h1 .line > span { animation-delay: 1.45s; }
 html.pt-intro .hero h1 .line:nth-child(2) > span { animation-delay: 1.57s; }
 html.pt-intro .hero h1 .line:nth-child(3) > span { animation-delay: 1.69s; }
 html.pt-intro .hero__bg img { animation-delay: 1.2s; }
+
+/* ---------- panel entegrasyonu ---------- */
+.hero__bar em { display: block; font-style: normal; }
+.brand__img { height: 46px; width: auto; max-width: 220px; object-fit: contain; }
+.pt__img { max-height: 130px; max-width: 70vw; object-fit: contain; }
+.footer__admin { color: inherit; opacity: .6; text-decoration: underline; text-underline-offset: 3px; }
+.footer__admin:hover { opacity: 1; }
+html.tm-edit .pt { display: none; }
+html.tm-edit [data-k] { cursor: text; border-radius: 3px; transition: outline-color .15s, background .15s; outline: 1.5px dashed transparent; outline-offset: 3px; }
+html.tm-edit [data-k]:hover { outline-color: rgba(225, 27, 56, .65); background: rgba(225, 27, 56, .05); }
+html.tm-edit [data-k][contenteditable] { outline: 2px solid var(--red); background: rgba(255, 255, 255, .08); }
+html.tm-edit .tm-img { cursor: pointer; transition: filter .2s, outline-color .2s; outline: 2px dashed transparent; outline-offset: -2px; }
+html.tm-edit .tm-img:hover { filter: brightness(.85); outline-color: var(--red); }
+.tm-imgbtn { position: absolute; top: 96px; right: 24px; z-index: 5; background: var(--red); color: #fff; border: 0; border-radius: 8px; padding: 10px 14px; font-weight: 700; font-size: 13px; box-shadow: var(--shadow); }
+html.tm-edit .wa-float, html.tm-edit .mbar { display: none; }

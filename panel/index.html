@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yönetim Paneli — TM Isı Sistemleri</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#040B1F">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=1793162514">
+<link rel="stylesheet" href="panel.css?v=1793162514">
+</head>
+<body class="pn">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-mark" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="square"><path d="M41.3 47.0L11.9 30.0 M29.2 40.0L25.8 29.5 M29.2 40.0L18.4 42.3 M19.5 34.4L17.0 26.8 M19.5 34.4L11.7 36.1 M40.5 50.0L6.5 50.0 M26.5 50.0L18.3 42.6 M26.5 50.0L18.3 57.4 M15.3 50.0L9.4 44.6 M15.3 50.0L9.4 55.4 M41.3 53.0L11.9 70.0 M29.2 60.0L18.4 57.7 M29.2 60.0L25.8 70.5 M19.5 65.6L11.7 63.9 M19.5 65.6L17.0 73.2 M46.5 29.0L39.1 20.8 M46.5 17.2L41.1 11.3 M46.5 71.0L39.1 79.2 M46.5 82.8L41.1 88.7"/><path class="sun-rays" d="M59.6 29.3L62.3 14.5 M66.5 31.8L71.5 23.2 M72.1 36.5L83.6 26.9 M75.7 42.8L85.1 39.4 M77.0 50.0L92.0 50.0 M75.7 57.2L85.1 60.6 M72.1 63.5L83.6 73.1 M66.5 68.2L71.5 76.8 M59.6 70.7L62.3 85.5"/></g><rect x="44.6" y="6" width="3.8" height="88" fill="currentColor"/><rect x="51.6" y="6" width="3.8" height="88" fill="currentColor"/><path d="M56 34.5a15.5 15.5 0 0 1 0 31z" fill="currentColor"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></g></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 8h16M4 16h10"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></g></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 6h16M7 12h10M10 18h4"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6a1 1 0 0 1 1 1v1H8V5a1 1 0 0 1 1-1z"/><path d="M16 5h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/><path d="M8 12h8M8 16h5"/></g></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+<symbol id="i-tool" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+<symbol id="i-headset" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"/><path d="M18 17v1a3 3 0 0 1-3 3h-3"/></g></symbol>
+<symbol id="i-search-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><circle cx="12" cy="13" r="3"/><path d="m14.2 15.2 2.3 2.3"/></g></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></g></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/></g></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></g></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></g></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 16V4M7 9l5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></symbol>
+<symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></g></symbol>
+
+<symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></g></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></g></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></g></symbol>
+<symbol id="i-cog" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></g></symbol>
+<symbol id="i-inbox" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/></g></symbol>
+<symbol id="i-out" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></g></symbol>
+<symbol id="i-ext" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></g></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></g></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></g></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></g></symbol>
+<symbol id="i-desk" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></g></symbol>
+<symbol id="i-mob" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></g></symbol>
+<symbol id="i-undo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></g></symbol>
+</svg>
+
+<!-- giriş -->
+<div class="pn-login" id="login">
+  <form class="pn-login__card" id="loginForm">
+    <svg class="pn-login__mark mark" style="color:#E11B38"><use href="#i-mark"/></svg>
+    <div class="pn-login__brand"><b>TM</b><span>Isı Sistemleri</span></div>
+    <h1>Yönetim Paneli</h1>
+    <p>Sitenizi yönetmek için giriş yapın.</p>
+    <div class="field"><label for="pw">Şifre</label><input id="pw" type="password" autocomplete="current-password" required></div>
+    <button class="btn btn--block" type="submit"><svg><use href="#i-lock"/></svg> Giriş yap</button>
+    <div class="pn-login__err" id="loginErr" hidden>Şifre hatalı.</div>
+    <div class="pn-login__hint">Demo şifresi: <b>tm2026</b></div>
+  </form>
+  <a class="pn-login__back" href="../">← Siteye dön</a>
+</div>
+
+<!-- uygulama -->
+<div class="pn-app" id="app" hidden>
+  <aside class="pn-side">
+    <a class="pn-side__brand" href="#genel"><svg class="mark" style="color:#E11B38"><use href="#i-mark"/></svg><span><b>TM</b><small>Yönetim Paneli</small></span></a>
+    <nav class="pn-nav">
+      <a href="#genel" data-nav="genel"><svg><use href="#i-grid"/></svg><span>Genel bakış</span></a>
+      <a href="#urunler" data-nav="urunler"><svg><use href="#i-box"/></svg><span>Ürünler</span></a>
+      <a href="#kategoriler" data-nav="kategoriler"><svg><use href="#i-folder"/></svg><span>Kategoriler</span></a>
+      <a href="#duzenleyici" data-nav="duzenleyici"><svg><use href="#i-edit"/></svg><span>Sayfa düzenleyici</span></a>
+      <a href="#ayarlar" data-nav="ayarlar"><svg><use href="#i-cog"/></svg><span>Site ayarları</span></a>
+      <a href="#talepler" data-nav="talepler"><svg><use href="#i-inbox"/></svg><span>Talepler</span><em data-unread hidden>0</em></a>
+    </nav>
+    <div class="pn-side__foot">
+      <a href="../" target="_blank" rel="noopener"><svg><use href="#i-ext"/></svg><span>Siteyi görüntüle</span></a>
+      <button type="button" data-logout><svg><use href="#i-out"/></svg><span>Çıkış</span></button>
+    </div>
+  </aside>
+
+  <main class="pn-main">
+    <header class="pn-top">
+      <div><small class="pn-top__crumb">TM Isı Sistemleri</small><h1 data-title>Genel bakış</h1></div>
+      <div class="pn-top__acts">
+        <span class="pn-badge" title="Bu demoda değişiklikler yalnızca bu tarayıcıda saklanır">Demo modu</span>
+        <a class="btn btn--sm btn--ghost" href="../" target="_blank" rel="noopener"><svg><use href="#i-ext"/></svg> Siteyi aç</a>
+      </div>
+    </header>
+    <div class="pn-view" data-view></div>
+  </main>
+</div>
+
+<!-- ürün düzenleme -->
+<div class="modal pn-modal" id="pEdit" role="dialog" aria-modal="true" aria-labelledby="pe-title">
+  <div class="modal__bg" data-close></div>
+  <form class="modal__box pn-form" id="pForm" novalidate>
+    <button class="modal__close" type="button" aria-label="Kapat" data-close><svg><use href="#i-close"/></svg></button>
+    <div class="pn-form__img">
+      <div class="pn-imgbox" data-pimg></div>
+      <div class="pn-imgacts">
+        <label class="btn btn--sm btn--navy"><svg><use href="#i-upload"/></svg> Görsel yükle<input type="file" accept="image/*" hidden data-pfile></label>
+        <button class="btn btn--sm btn--ghost" type="button" data-pimg-rm>Kaldır</button>
+      </div>
+      <p class="pn-help">Beyaz veya düz zeminli ürün fotoğrafı önerilir. Görsel otomatik küçültülür.</p>
+    </div>
+    <div class="pn-form__body">
+      <h3 id="pe-title" data-pe-title>Ürünü düzenle</h3>
+      <div class="form-grid">
+        <div class="field full"><label for="pe-t">Ürün adı *</label><input id="pe-t" name="t" required></div>
+        <div class="field"><label for="pe-bn">Marka</label><input id="pe-bn" name="bn" list="brandList" placeholder="Örn. Calmet"></div>
+        <div class="field"><label for="pe-c">Kategori *</label><select id="pe-c" name="c" required></select></div>
+        <div class="field full"><label for="pe-desc">Açıklama</label><textarea id="pe-desc" name="desc" rows="4"></textarea></div>
+        <div class="field full"><label for="pe-feats">Öne çıkan özellikler <span class="pn-muted">(her satıra bir özellik)</span></label><textarea id="pe-feats" name="feats" rows="3"></textarea></div>
+        <div class="field"><label for="pe-use">Kullanım alanı</label><input id="pe-use" name="use"></div>
+        <div class="field"><label for="pe-war">Garanti</label><input id="pe-war" name="warranty"></div>
+        <div class="field full"><label for="pe-comm">Haberleşme <span class="pn-muted">(isteğe bağlı)</span></label><input id="pe-comm" name="comm"></div>
+        <label class="pn-check"><input type="checkbox" name="featured"> <span><b>Öne çıkan</b>Anasayfadaki vitrinde göster</span></label>
+        <label class="pn-check"><input type="checkbox" name="visible"> <span><b>Sitede yayında</b>Kapalıysa ürün gizlenir</span></label>
+      </div>
+      <div class="pn-form__acts">
+        <button class="btn btn--ghost pn-danger" type="button" data-pdel><svg><use href="#i-trash"/></svg> Sil</button>
+        <span></span>
+        <button class="btn btn--ghost" type="button" data-close>Vazgeç</button>
+        <button class="btn" type="submit">Kaydet</button>
+      </div>
+    </div>
+  </form>
+</div>
+<datalist id="brandList"></datalist>
+
+<div class="modal pn-modal" id="confirm" role="alertdialog" aria-modal="true">
+  <div class="modal__bg" data-close></div>
+  <div class="modal__box pn-confirm">
+    <h3 data-cf-title>Emin misiniz?</h3>
+    <p data-cf-text></p>
+    <div class="pn-form__acts"><span></span><button class="btn btn--ghost" type="button" data-close>Vazgeç</button><button class="btn" type="button" data-cf-ok>Onayla</button></div>
+  </div>
+</div>
+
+<div class="toast" role="status" aria-live="polite"><svg><use href="#i-check"/></svg><span></span></div>
+
+<script src="../assets/js/data.js?v=1793162514"></script>
+<script src="../assets/js/photos.js?v=1793162514"></script>
+<script src="../assets/js/store.js?v=1793162514"></script>
+<script src="panel.js?v=1793162514"></script>
+</body>
+</html>

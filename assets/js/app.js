@@ -2,54 +2,18 @@
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const P = window.TM_PRODUCTS || [];
-  const PHOTOS = window.TM_PHOTOS || {};
+  const S = window.TMStore;
+  const SET = S.settings();
+  const P = S.products().filter(p => !p.hidden);
   const byId = Object.fromEntries(P.map(p => [p.id, p]));
-  const WA = '905302163800';
+  const digits = v => { let d = String(v || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '90' + d.slice(1); else if (d.length === 10) d = '90' + d; return d; };
+  const WA = digits(SET.wa) || '905302163800';
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const icon = (id) => `<svg><use href="#${id}"/></svg>`;
+  const EDIT = new URLSearchParams(location.search).has('edit') && window.parent !== window;
 
-  const CATS = [
-    { id: 'kalorimetre', name: 'Kalorimetreler', art: 'heat-us', cover: 'assets/img/ortam/montaj.jpg', desc: 'Ultrasonik, mekanik ve büyük çaplı ısı sayaçları ile bireysel ısı paylaşımı.' },
-    { id: 'su-sayaci', name: 'Su Sayaçları', art: 'water-cold', img: 'polimeter-soguk-su-sayaci', desc: 'Sıcak, soğuk, ultrasonik ve haberleşmeli su sayaçları.' },
-    { id: 'okuma', name: 'Okuma Cihazları', art: 'converter', img: 'calmet-m250-konvertor', desc: 'M-Bus konvertörler ve merkezi okuma birimleri.' },
-    { id: 'pompa', name: 'Pompa Sistemleri', art: 'pump-circ', img: 'wilo-flansli-sirkulasyon-pompasi', desc: 'Sirkülasyon pompası, hidrofor, dalgıç pompa ve ısı pompası.' },
-    { id: 'vana', name: 'Vana ve Kontrol', art: 'valve3', img: 'caleffi-termostatik-karisim-vanasi', desc: 'Fark basınç, 3 yollu vana, termostat, kollektör ve emniyet ekipmanı.' },
-    { id: 'tesisat', name: 'Tesisat Ürünleri', art: 'tank', img: 'wates-genlesme-tanki', desc: 'Genleşme tankı, rekor, conta, pil ve bağlantı elemanları.' }
-  ];
+  const CATS = S.cats();
   const catName = Object.fromEntries(CATS.map(c => [c.id, c.name]));
-
-  // Ürün tipine göre açıklama (model bazlı teknik değer uydurmadan, genel ve doğru bilgiler)
-  const DESC = {
-    'heat-us': ['Hareketli parçası olmayan ultrasonik ölçüm prensibiyle ısı tüketimini uzun yıllar kararlı şekilde ölçer. Merkezi ısıtmalı binalarda daire girişine monte edilerek bireysel ısı paylaşımı sağlar.', ['Ultrasonik ölçüm', 'Hareketli parça yok', 'Düşük debide hassas', 'Uzaktan okumaya uygun*'], 'Daire tipi ısı paylaşımı'],
-    'heat-mech': ['Kanatlı (türbin) debi ölçümüne dayanan, ekonomik ve kanıtlanmış ısı sayacı. Gidiş-dönüş sıcaklık sensörleriyle tüketilen enerjiyi hesaplar.', ['Mekanik ölçüm', 'Ekonomik çözüm', 'Kolay montaj'], 'Daire tipi ısı paylaşımı'],
-    'heat-flange': ['Büyük çaplı hatlar için flanşlı gövdeli ultrasonik ısı sayacı. Kazan dairesi, bina girişi, blok ve ticari tesislerde toplam enerji tüketimini ölçer.', ['Ultrasonik ölçüm', 'Flanşlı bağlantı', 'Büyük debi', 'Ayrı hesaplayıcı ünite'], 'Kazan dairesi / ticari tesis'],
-    'water-hot': ['Sıcak su hattı için yüksek sıcaklığa dayanıklı malzemeyle üretilen su sayacı. Kırmızı işaretiyle soğuk su sayacından kolayca ayrılır.', ['Sıcak su', 'Mekanik sayaç', 'Okunaklı mekanik gösterge'], 'Sıcak kullanım suyu'],
-    'water-cold': ['Şebeke suyu tüketimini hacim (m³) cinsinden ölçen soğuk su sayacı. Konut ve iş yerlerinde güvenilir ölçüm sağlar.', ['Soğuk su', 'Mekanik sayaç', 'Okunaklı mekanik gösterge'], 'Konut / iş yeri'],
-    'water-us': ['Ultrasonik prensiple çalışan, hareketli parçası olmayan su sayacı. Düşük debilerde de hassas ölçüm sunar.', ['Ultrasonik ölçüm', 'Dijital ekran', 'Hareketli parça yok'], 'Konut / iş yeri'],
-    'water-radio': ['Haberleşme modüllü su sayacı; okuma verisini kablolu/kablosuz ağ üzerinden göndererek dairelere girmeden merkezi okuma sağlar.', ['Uzaktan okuma', 'Merkezi sisteme bağlanır', 'Sıcak / soğuk su'], 'Uzaktan okumalı binalar'],
-    'converter': ['Bina içindeki ısı ve su sayaçlarından M-Bus hattı üzerinden veri toplayan konvertör / okuma birimi. Tüm sayaçların merkezi olarak okunmasını sağlar.', ['M-Bus', 'Merkezi okuma', 'Çoklu sayaç'], 'Bina okuma sistemi'],
-    'pump-circ': ['Kalorifer ve sıcak su devrelerinde suyun dolaşımını sağlayan sirkülasyon pompası. Frekans kontrollü modeller ihtiyaca göre devir ayarlayarak enerji tasarrufu sağlar.', ['Isıtma devresi', 'Dişli (rakorlu) bağlantı', 'Sessiz çalışma'], 'Isıtma / sıcak su devresi'],
-    'pump-flange': ['Merkezi sistemler ve büyük tesisler için flanşlı bağlantılı sirkülasyon pompası.', ['Flanşlı bağlantı', 'Yüksek debi', 'Merkezi sistem'], 'Merkezi ısıtma / soğutma'],
-    'pump-twin': ['İki pompa gövdesini tek gövdede birleştiren ikiz sirkülasyon pompası; yedekli ya da paralel çalışma ile kesintisiz dolaşım sağlar.', ['İkiz gövde', 'Yedekli çalışma', 'Flanşlı bağlantı'], 'Merkezi sistem'],
-    'pump-booster': ['Şebeke basıncının yetersiz kaldığı yerlerde suyu istenen basınçta ileten hidrofor / basınçlandırma sistemi.', ['Basınçlandırma', 'Basınç tankı', 'Otomatik çalışma'], 'Bina su tesisatı'],
-    'pump-sub': ['Kuyu, depo ve drenaj uygulamaları için suya daldırılarak çalışan dalgıç pompa.', ['Dalgıç tip', 'Kuyu / depo', 'Drenaj'], 'Kuyu / depo / drenaj'],
-    'pump-solar': ['Güneş enerjili sıcak su sistemlerinde kollektör devresinin sirkülasyonu için kullanılan pompa.', ['Güneş enerjisi devresi', 'Sirkülasyon'], 'Güneş enerjili sistemler'],
-    'heatpump': ['Havadaki ısıyı kullanarak yüksek verimle ısıtma ve sıcak su üreten ısı pompası.', ['Yüksek verim', 'Isıtma + sıcak su', 'Yenilenebilir enerji'], 'Konut / ticari ısıtma'],
-    'valve3': ['Isıtma devrelerinde akış yönünü veya karışımı kontrol eden motorlu vana çözümleri. Otomasyon sistemleriyle birlikte çalışır.', ['Motorlu kontrol', 'Otomasyon uyumlu', 'Isıtma devresi'], 'Isıtma kontrolü'],
-    'valve': ['Isıtma ve su tesisatlarında basınç, debi ve sıcaklık kontrolü için kullanılan vana ve emniyet ekipmanı.', ['Tesisat kontrolü', 'Pirinç gövde', 'Uzun ömür'], 'Isıtma / su tesisatı'],
-    'thermostat': ['Ortam sıcaklığını ayarlayarak ısıtma sistemini kontrol eden oda termostatı; konforu artırır, gereksiz tüketimi azaltır.', ['Sıcaklık kontrolü', 'Enerji tasarrufu', 'Kolay kullanım'], 'Ev / ofis'],
-    'manifold': ['Yerden ısıtma ve dağıtım tesisatlarında devreleri tek noktadan dağıtıp toplayan kollektör.', ['Çok devreli', 'Debi ayarı', 'Yerden ısıtma'], 'Yerden ısıtma'],
-    'gauge': ['Tesisat basıncını anlık izlemek için kullanılan manometre.', ['Basınç göstergesi', 'Tesisat izleme'], 'Isıtma / su tesisatı'],
-    'station': ['Daireye gelen ısıtma ve sıcak su devresini tek kompakt ünitede toplayan ısı istasyonu; sayaç bağlantısına uygundur.', ['Kompakt ünite', 'Isıtma + sıcak su', 'Sayaç bağlantısı'], 'Daire tipi ısı dağıtımı'],
-    'macerator': ['Bodrum, banyo ve şebekeye kot farkı olan alanlarda atık suyu öğüterek / pompalayarak tahliye eden cihaz.', ['Atık su tahliyesi', 'Kompakt', 'Kolay montaj'], 'Bodrum / banyo'],
-    'vent': ['Tesisatta biriken havayı otomatik olarak tahliye ederek verimli ve sessiz çalışma sağlar.', ['Otomatik hava atma', 'Pirinç gövde'], 'Isıtma tesisatı'],
-    'tank': ['Isıtma ve su tesisatlarında genleşen suyu karşılayarak basıncı dengede tutan genleşme tankı.', ['Basınç dengesi', 'Membranlı', 'Isıtma / sıhhi su'], 'Isıtma / su tesisatı'],
-    'battery': ['Isı ve su sayaçları için yedek pil.', ['Sayaç uyumlu'], 'Sayaç bakımı'],
-    'gasket': ['Sayaç ve vana bağlantılarında sızdırmazlık için conta grupları.', ['Sızdırmazlık', 'Farklı ölçüler'], 'Tesisat bağlantıları'],
-    'fitting': ['Sayaç, pompa ve tank bağlantıları için rekor, redüksiyon ve bağlantı elemanları.', ['Pirinç', 'Farklı çaplar'], 'Tesisat bağlantıları']
-  };
-  const isMeter = p => p.c === 'kalorimetre' || p.c === 'su-sayaci';
 
   /* ---------- teklif listesi (localStorage) ---------- */
   const KEY = 'tm_teklif_v1';
@@ -79,7 +43,8 @@
 
   /* ---------- görsel ---------- */
   function visual(p) {
-    if (PHOTOS[p.id]) return `<img src="assets/img/urunler/${PHOTOS[p.id]}" alt="${esc(p.t)}" loading="lazy">`;
+    if (p.photo && p.photo.startsWith('idb:')) return `<img data-idb="${p.photo}" alt="${esc(p.t)}">`;
+    if (p.photo) return `<img src="${esc(p.photo)}" alt="${esc(p.t)}" loading="lazy">`;
     return `<span class="ph"><svg><use href="#i-mark"/></svg><small>Görsel hazırlanıyor</small></span>`;
   }
   function card(p, i = 0) {
@@ -146,6 +111,13 @@
   document.addEventListener('click', e => { const c = e.target.closest('[data-close]'); if (c) closeModal(c.closest('.modal')); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') $$('.modal.is-open').forEach(m => { closeModal(m); if (m.id === 'pmodal') setParam('urun', null); }); });
 
+  function catImg(c, cover) {
+    const cls = cover ? ' class="cat__cover"' : '';
+    if (c.photo && c.photo.startsWith('idb:')) return `<img${cls} data-idb="${c.photo}" alt="">`;
+    const src = c.photo || (cover && c.cover) || `assets/img/urunler/${c.img}.jpg`;
+    return `<img${cls} src="${esc(src)}" alt="" loading="lazy">`;
+  }
+
   /* ---------- anasayfa ---------- */
   function home() {
     const mq = $('[data-marquee]');
@@ -158,12 +130,12 @@
     if (cats) cats.innerHTML = CATS.map((c, i) => {
       const n = P.filter(p => p.c === c.id).length;
       return `<a class="cat rv anim-gate ${i === 0 ? 'cat--feature' : i === CATS.length - 1 ? 'cat--wide' : ''}" style="--d:${i}" href="urunler.html?kat=${c.id}">
-        <div class="cat__art">${c.cover ? `<img class="cat__cover" src="${c.cover}" alt="" loading="lazy">` : `<img src="assets/img/urunler/${c.img}.jpg" alt="" loading="lazy">`}</div>
-        <div class="cat__body"><div><span class="cat__n">${String(i + 1).padStart(2, '0')} · ${n} ürün</span><h3>${c.name}</h3><p>${c.desc}</p></div><span class="cat__go">${icon('i-arrow')}</span></div></a>`;
+        <div class="cat__art">${catImg(c, i === 0)}</div>
+        <div class="cat__body"><div><span class="cat__n">${String(i + 1).padStart(2, '0')} · ${n} ürün</span><h3>${esc(c.name)}</h3><p>${esc(c.desc)}</p></div><span class="cat__go">${icon('i-arrow')}</span></div></a>`;
     }).join('');
     const rail = $('[data-rail]');
     if (rail) {
-      rail.innerHTML = rail.dataset.featured.split(',').map(id => byId[id]).filter(Boolean).map((p, i) => card(p, i).replace('data-open=', 'data-link=')).join('');
+      rail.innerHTML = P.filter(p => p.featured).map((p, i) => card(p, i).replace('data-open=', 'data-link=')).join('');
       rail.addEventListener('click', e => {
         const a = e.target.closest('[data-add]'); if (a) { e.stopPropagation(); addFeedback(a.dataset.add); return; }
         const c = e.target.closest('[data-link]'); if (c) go('urunler.html?urun=' + c.dataset.link);
@@ -173,18 +145,6 @@
       $('[data-rail-prev]')?.addEventListener('click', () => rail.scrollBy({ left: -by(), behavior: 'smooth' }));
       $('[data-rail-next]')?.addEventListener('click', () => rail.scrollBy({ left: by(), behavior: 'smooth' }));
     }
-    // canlı kalorimetre verisi
-    let kwh = 48213, t = 0;
-    const live = () => {
-      t += 1;
-      const sup = 70 + Math.sin(t / 3) * 0.6, ret = 52.4 + Math.sin(t / 4 + 1) * 0.7, kw = 0.6 * 1.163 * (sup - ret);
-      kwh += kw / 60;
-      $$('[data-live="sup"]').forEach(el => el.textContent = sup.toFixed(1) + (el.closest('.readout') ? '°C' : '°'));
-      $$('[data-live="ret"]').forEach(el => el.textContent = ret.toFixed(1) + (el.closest('.readout') ? '°C' : '°'));
-      $$('[data-live="kw"]').forEach(el => el.textContent = kw.toFixed(1) + ' kW');
-      $$('[data-live="kwh"]').forEach(el => el.textContent = Math.floor(kwh));
-    };
-    if ($('[data-live]') && !matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(live, 1200);
   }
 
   /* ---------- katalog ---------- */
@@ -208,7 +168,7 @@
     function render() {
       const qq = norm(st.q.trim());
       const list = P.filter(p => (!st.kat || p.c === st.kat) && (!st.marka || p.b === st.marka) && (!qq || norm(p.t + ' ' + p.bn + ' ' + catName[p.c]).includes(qq)));
-      grid.innerHTML = list.map(card).join('');
+      grid.innerHTML = list.map(card).join(''); S.hydrate(grid);
       $('[data-empty]').classList.toggle('is-on', !list.length);
       $('[data-count-line]').innerHTML = `<b>${list.length}</b> ürün`;
       $$('[data-kat]').forEach(b => b.classList.toggle('is-on', b.dataset.kat === st.kat));
@@ -239,23 +199,23 @@
     const m = $('#pmodal');
     function open(id) {
       const p = byId[id]; if (!p) return;
-      const [d, f, use] = DESC[p.a] || DESC.valve;
+      const inf = S.info(p);
       $('[data-pm-art]', m).innerHTML = visual(p);
       $('[data-pm-brand]', m).textContent = p.bn;
       $('[data-pm-title]', m).textContent = p.t;
-      $('[data-pm-desc]', m).textContent = d;
-      $('[data-pm-feat]', m).innerHTML = f.map(x => `<li>${esc(x.replace('*', ''))}</li>`).join('');
+      $('[data-pm-desc]', m).textContent = inf.desc;
+      $('[data-pm-feat]', m).innerHTML = inf.feats.filter(Boolean).map(x => `<li>${esc(x)}</li>`).join('');
       $('[data-pm-spec]', m).innerHTML = [
-        ['Kategori', catName[p.c]], ['Marka', p.bn], ['Kullanım', use],
-        ['Montaj', 'Uzman ekibimizce yapılır'], ['Garanti', isMeter(p) ? '5 yıl' : 'Üretici garantisi'],
-        ...(f.some(x => x.includes('*')) ? [['Haberleşme', 'Modele göre M-Bus / kablosuz seçenekleri']] : [])
-      ].map(([k, v]) => `<li><span>${k}</span><b>${esc(v)}</b></li>`).join('');
+        ['Kategori', catName[p.c]], ['Marka', p.bn], ['Kullanım', inf.use],
+        ['Montaj', 'Uzman ekibimizce yapılır'], ['Garanti', inf.warranty],
+        ...(inf.comm ? [['Haberleşme', inf.comm]] : [])
+      ].filter(r => r[1]).map(([k, v]) => `<li><span>${k}</span><b>${esc(v)}</b></li>`).join('');
       const add = $('[data-pm-add]', m);
       const sync = () => { const on = cart.has(id); add.innerHTML = `${icon(on ? 'i-check' : 'i-plus')} <span>${on ? 'Listede — teklif al' : 'Teklif listesine ekle'}</span>`; add.classList.toggle('btn--navy', on); };
       sync();
       add.onclick = () => { if (cart.has(id)) { location.href = 'teklif.html'; return; } addFeedback(id); sync(); };
       $('[data-pm-wa]', m).href = `https://wa.me/${WA}?text=${encodeURIComponent('Merhaba, "' + p.t + '" ürünü hakkında bilgi ve fiyat almak istiyorum.')}`;
-      openModal(m); setParam('urun', id);
+      S.hydrate(m); openModal(m); setParam('urun', id);
     }
     grid.addEventListener('click', e => {
       const a = e.target.closest('[data-add]'); if (a) { e.stopPropagation(); addFeedback(a.dataset.add); return; }
@@ -290,10 +250,10 @@
   }
   function sentView(body, ok, text, subject) {
     const wa = `https://wa.me/${WA}?text=${encodeURIComponent(subject + '\n\n' + text)}`;
-    const mail = `mailto:satis@tmisisistemleri.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+    const mail = `mailto:${SET.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
     body.innerHTML = ok
-      ? `<div class="ok">${icon('i-check')}</div><h3 id="sent-title">Talebiniz alındı</h3><p>En kısa sürede, en geç 24 saat içinde size dönüş yapacağız. Acil durumlar için bizi arayabilirsiniz.</p><a class="btn btn--block" href="tel:+905302163800">${icon('i-phone')} 0530 216 38 00</a>`
-      : `<div class="ok" style="background:var(--red-soft);color:var(--red)">${icon('i-doc')}</div><h3 id="sent-title">Talebiniz hazır</h3><p>Form şu an doğrudan iletilemedi. Aşağıdan tek dokunuşla WhatsApp ya da e-posta ile gönderebilirsiniz; bilgileriniz otomatik doldurulur.</p>
+      ? `<div class="ok">${icon('i-check')}</div><h3 id="sent-title">Talebiniz alındı</h3><p>En kısa sürede, en geç 24 saat içinde size dönüş yapacağız. Acil durumlar için bizi arayabilirsiniz.</p><a class="btn btn--block" href="tel:+${digits(SET.tel1)}">${icon('i-phone')} ${esc(SET.tel1)}</a>`
+      : `<div class="ok" style="background:var(--red-soft);color:var(--red)">${icon('i-doc')}</div><h3 id="sent-title">Talebiniz kaydedildi</h3><p>Ekibimiz en kısa sürede size dönüş yapacak. Dilerseniz talebinizi aşağıdan WhatsApp ya da e-posta ile de hemen iletebilirsiniz; bilgileriniz otomatik doldurulur.</p>
          <div style="display:grid;gap:10px"><a class="btn btn--wa" href="${wa}" target="_blank" rel="noopener">${icon('i-wa')} WhatsApp ile gönder</a><a class="btn btn--navy" href="${mail}">${icon('i-mail')} E-posta ile gönder</a><button class="btn btn--ghost" type="button" data-copy>${icon('i-copy')} Metni kopyala</button></div>`;
     const cp = $('[data-copy]', body);
     if (cp) cp.onclick = () => navigator.clipboard?.writeText(subject + '\n\n' + text).then(() => toast('Kopyalandı'));
@@ -306,6 +266,16 @@
       const btn = $('[data-submit]') || $('[type=submit]', form);
       btn.disabled = true; btn.style.opacity = .7;
       const text = summary(form);
+      try {
+        const fields = {};
+        $$('input[name]:not([type=hidden]):not([type=file]):not([name=website]), select[name], textarea[name]', form).forEach(el => {
+          if (el.type === 'checkbox') { if (el.checked) fields['Montaj dahil'] = 'Evet'; return; }
+          const lab = (form.querySelector(`label[for="${el.id}"]`)?.textContent || el.name).replace('*', '').trim();
+          if (el.value.trim()) fields[lab] = el.value.trim();
+        });
+        const list = form.querySelector('[data-list-field]')?.value;
+        S.addRequest({ id: Date.now().toString(36), tur: form.dataset.form, tarih: new Date().toISOString(), fields, liste: list || '', okundu: false });
+      } catch (err) { }
       let ok = false;
       try {
         const fd = new FormData(form); fd.append('_tur', form.dataset.form);
@@ -382,6 +352,7 @@
     setTimeout(() => { location.href = href; }, 600);
   }
   document.addEventListener('click', e => {
+    if (EDIT) return;
     const a = e.target.closest('a[href]');
     if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if (a.target === '_blank' || a.hasAttribute('download')) return;
@@ -396,7 +367,9 @@
   if (document.documentElement.classList.contains('pt-intro')) setTimeout(() => document.documentElement.classList.remove('pt-intro'), 2000);
   window.TMgo = go;
 
+  TMContent.apply({ S, SET, digits, EDIT });
   common(); home(); catalog(); quote(); contact(); faqNav();
+  S.hydrate();
   vis();
   setTimeout(vis, 300);
 })();
